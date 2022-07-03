@@ -6,7 +6,8 @@
 * [Amr Elbaz](https://github.com/AmrAlbaz-34)
 
 ## How to run it ?
-Go to the next file (./Snake_Game/bin) and download the Debug file and run the Sanke_Game.exe
+Go to the [Debug Folder](https://github.com/Ali-Elshorpagi/Snake_Game/tree/main/Snake_Game/bin) and download it and run the Sanke_Game.exe file 
+inside the debug folder
 
 ## Start Game
 ![Start Game](./img/Start.png)
