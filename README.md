@@ -1,5 +1,5 @@
 # Snake Game
-### A game with C++ graphics.h library  
+#### A game with C++ graphics.h library  
 
 ## Start Game
 ![Example screenshot](./img/Start.png)
