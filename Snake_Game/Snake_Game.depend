@@ -1,0 +1,35 @@
+# depslib dependency file v1.0
+1641316785 source:f:\ali\fci\c++_programming\snake_game\main.cpp
+	<bits/stdc++.h>
+	"graphics.h"
+	<mmsystem.h>
+	<stdio.h>
+	<climits>
+	<queue>
+
+1266090614 c:\program files (x86)\codeblocks-ep\sdk\winbgim\include\graphics.h
+	<windows.h>
+	<limits.h>
+	<sstream>
+
+1641329285 source:f:\ali\fci\c++_programming\project\snake_game\main.cpp
+	<bits/stdc++.h>
+	"graphics.h"
+	<mmsystem.h>
+	<stdio.h>
+	<climits>
+	<queue>
+
+1641329285 source:f:\ali\fci\year_0_term_1\programming ii\sn_gm\project\snake_game\main.cpp
+	<bits/stdc++.h>
+	"graphics.h"
+	<mmsystem.h>
+	<stdio.h>
+	<climits>
+	<queue>
+
+1266090614 f:\ali\compiler\codeblocks_ep\codeblocks-ep\sdk\winbgim\include\graphics.h
+	<windows.h>
+	<limits.h>
+	<sstream>
+
