@@ -1,6 +1,10 @@
 # Snake Game
 #### A game with C++ graphics.h library  
 
+# Developers :
+* Ali Elshorpagi : @Ali-Elshorpagi
+* Amr Elbaz : @AmrAlbaz-34
+
 ## Start Game
 ![Example screenshot](./img/Start.png)
 
