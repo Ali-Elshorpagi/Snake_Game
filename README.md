@@ -5,9 +5,9 @@
 * [Ali Elshorpagi](https://github.com/Ali-Elshorpagi)
 * [Amr Elbaz](https://github.com/AmrAlbaz-34)
 
-## How to run it ?
+## How to run the game immediately ?
 Go to the [Debug Folder](https://github.com/Ali-Elshorpagi/Snake_Game/tree/main/Snake_Game/bin) and download it and run the Sanke_Game.exe file 
-inside the debug folder
+inside it
 
 ## Start Game
 ![Start Game](./img/Start.png)
