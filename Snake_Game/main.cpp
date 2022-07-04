@@ -462,7 +462,7 @@ void end()   /// We make this func To Show The End
     settextstyle(GOTHIC_FONT,HORIZ_DIR,2);
     outtextxy(150, 450, "Press \"ESC\" TO Close");
     settextstyle(GOTHIC_FONT,HORIZ_DIR,1);
-    outtextxy(70, 480, "Press \"SPACE\" TO Return The Game");
+    outtextxy(95, 490, "Press \"SPACE\" TO Play Again..:)");
 
     /*----------------------------------------*/
 
@@ -539,7 +539,6 @@ int main( )
     closegraph( );
 }
 
-
 void gameover()
 {
     GameOver = true;
@@ -559,7 +558,7 @@ void gameover()
             }
             else if(int(ch) == 32)  /// 32 To press a SPACE
             {
-                outtextxy(110, 530, "Wait Next Version, friend |^_^|");
+                outtextxy(100, 530, "Wait Next Version, friend |^_^|");
             }
         }
     }
