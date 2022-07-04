@@ -500,7 +500,47 @@ void score()   /// We make this func to show the Score in game over screan
 
 int main( )
 {
+    initwindow(35 * CELL_SIZE, 38 * CELL_SIZE);
+    /// sndPlaySound("package/Snake Music.wav",SND_ASYNC|SND_LOOP);    /// WE add this line to play  a music during game
+    GameOver = false;
+    int i=0;
+    if(i==0)  /// we add this if to make starting and stop after that
+    {
+        drawBoard();
+        start();
+        setcolor(WHITE);
+        getch();
+        drawbar(20,20,613,613);
+        i++;
+    }
+    initSnake();
+    drawBoard();
+    int gameTimer = 0;
+    while(! GameOver )
+    {
+        if(gameTimer == INT_MAX)
+        {
+            gameTimer = 0;
+        }
+        if(gameTimer % 2000000 == 0)
+        {
+            moveFire();
+        }
+        if(gameTimer % 5000000 == 0)
+        {
+            moveSnake();
+            CounterScore();
+        }
+        gameTimer++;
+        checkkeyInput();
+    }
+    while(! kbhit());
+    closegraph( );
+}
 
+void play_again()
+{
+    snakeBody.empty();
     initwindow(35 * CELL_SIZE, 38 * CELL_SIZE);
     /// sndPlaySound("package/Snake Music.wav",SND_ASYNC|SND_LOOP);    /// WE add this line to play  a music during game
     GameOver = false;
@@ -558,6 +598,7 @@ void gameover()
             }
             else if(int(ch) == 32)  /// 32 To press a SPACE
             {
+                //play_again();
                 outtextxy(100, 530, "Wait Next Version, friend |^_^|");
             }
         }
