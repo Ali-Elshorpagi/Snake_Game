@@ -74,8 +74,8 @@ int board[38][35] = /// We Increase The Array To Show The score Under The Game
     {3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3},
     {3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3},
     {3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3},
-
 };
+
 void drawWall(int row,int col)
 {
     int left = col*CELL_SIZE;
@@ -92,6 +92,7 @@ void drawWall(int row,int col)
     line(left ,bottom,right ,bottom);
     line(left ,top ,right ,top);
 }
+
 void drawApple(int row,int col)
 {
     int left = col*CELL_SIZE;
@@ -135,6 +136,15 @@ void drawSnakeBody(int row,int col)
 }
 void drawBoard()
 {
+    for(int i=1; i<34; ++i)
+    {
+        for(int j=1; j<34; ++j)
+        {
+            if(board[4][25] || !board[4][25])
+                board[4][25] = 2;
+            board[i][j] = 0;
+        }
+    }
     for(int row=0; row<38; row++)
     {
         for(int col=0; col<35; col++)
@@ -533,6 +543,8 @@ int main( )
     closegraph();
 }
 
+
+
 void play_again()
 {
     counterscore = 0;
@@ -540,36 +552,8 @@ void play_again()
     {
         snakeBody.pop();
     }
-    initwindow(35 * CELL_SIZE, 38 * CELL_SIZE);
-    GameOver = false;
-    drawBoard();
-    start();
-    setcolor(WHITE);
-    getch();
-    drawbar(20,20,613,613);
-    initSnake();
-    drawBoard();
-    int gameTimer = 0;
-    while(! GameOver )
-    {
-        if(gameTimer == INT_MAX)
-        {
-            gameTimer = 0;
-        }
-        if(gameTimer % 2000000 == 0)
-        {
-            moveFire();
-        }
-        if(gameTimer % 5000000 == 0)
-        {
-            moveSnake();
-            CounterScore();
-        }
-        gameTimer++;
-        checkkeyInput();
-    }
-    while(! kbhit());
-    closegraph();
+    /*----------MAIN------------*/
+    main();
 }
 
 void gameover()
@@ -591,8 +575,8 @@ void gameover()
             }
             else if(int(ch) == 32)  /// 32 To press a SPACE
             {
-                // play_again();
-                outtextxy(100, 530, "Wait Next Version, friend |^_^|");
+                play_again();
+                //outtextxy(100, 530, "Wait Next Version, friend |^_^|");
             }
         }
     }
