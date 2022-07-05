@@ -503,16 +503,11 @@ int main( )
     initwindow(35 * CELL_SIZE, 38 * CELL_SIZE);
     /// sndPlaySound("package/Snake Music.wav",SND_ASYNC|SND_LOOP);    /// WE add this line to play  a music during game
     GameOver = false;
-    int i=0;
-    if(i==0)  /// we add this if to make starting and stop after that
-    {
-        drawBoard();
-        start();
-        setcolor(WHITE);
-        getch();
-        drawbar(20,20,613,613);
-        i++;
-    }
+    drawBoard();
+    start();
+    setcolor(WHITE);
+    getch();
+    drawbar(20,20,613,613);
     initSnake();
     drawBoard();
     int gameTimer = 0;
@@ -535,7 +530,7 @@ int main( )
         checkkeyInput();
     }
     while(! kbhit());
-    closegraph( );
+    closegraph();
 }
 
 void play_again()
@@ -547,16 +542,11 @@ void play_again()
     }
     initwindow(35 * CELL_SIZE, 38 * CELL_SIZE);
     GameOver = false;
-    int i=0;
-    if(i==0)
-    {
-        drawBoard();
-        start();
-        setcolor(WHITE);
-        getch();
-        drawbar(20,20,613,613);
-        i++;
-    }
+    drawBoard();
+    start();
+    setcolor(WHITE);
+    getch();
+    drawbar(20,20,613,613);
     initSnake();
     drawBoard();
     int gameTimer = 0;
@@ -579,7 +569,7 @@ void play_again()
         checkkeyInput();
     }
     while(! kbhit());
-    closegraph( );
+    closegraph();
 }
 
 void gameover()
@@ -601,8 +591,8 @@ void gameover()
             }
             else if(int(ch) == 32)  /// 32 To press a SPACE
             {
-                play_again();
-                //outtextxy(100, 530, "Wait Next Version, friend |^_^|");
+                // play_again();
+                outtextxy(100, 530, "Wait Next Version, friend |^_^|");
             }
         }
     }
