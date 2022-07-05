@@ -540,12 +540,15 @@ int main( )
 
 void play_again()
 {
-    snakeBody.empty();
+    counterscore = 0;
+    while(!snakeBody.empty())
+    {
+        snakeBody.pop();
+    }
     initwindow(35 * CELL_SIZE, 38 * CELL_SIZE);
-    /// sndPlaySound("package/Snake Music.wav",SND_ASYNC|SND_LOOP);    /// WE add this line to play  a music during game
     GameOver = false;
     int i=0;
-    if(i==0)  /// we add this if to make starting and stop after that
+    if(i==0)
     {
         drawBoard();
         start();
@@ -598,13 +601,9 @@ void gameover()
             }
             else if(int(ch) == 32)  /// 32 To press a SPACE
             {
-                //play_again();
-                outtextxy(100, 530, "Wait Next Version, friend |^_^|");
+                play_again();
+                //outtextxy(100, 530, "Wait Next Version, friend |^_^|");
             }
         }
     }
 }
-
-
-
-
