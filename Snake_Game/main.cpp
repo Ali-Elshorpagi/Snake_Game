@@ -16,6 +16,7 @@ const int WALL = 3;
 
 int counterscore = 0; /// Score Counter
 char arr[100000];     /// To sprintf
+long long speed = 5000000;
 
 bool GameOver = false;
 
@@ -170,7 +171,7 @@ void initSnake()
     Location loc;
     loc.r = 6;
     loc.c = 15;
-    for(int i=0; i<=3; i++)
+    for(int i=0; i<=2; i++)
     {
         snakeBody.push(loc);
         board[loc.r][loc.c] = 1;
@@ -205,7 +206,6 @@ Location getNextfire()
         break;
     }
     return nextFireLoc;
-
 }
 
 Location getNextHead()
@@ -238,7 +238,10 @@ void generatenextapple()
         c = rand() % 35;
     }
     while(board[r][c] != EMPTY);
-    counterscore++;   /// We Put the counter here because when the snake eat the apple the score increase dynamic
+    if(++counterscore)
+    {
+        speed -= 70000;
+    }
     board[r][c] = APPLE;
     drawApple(r,c);
 }
@@ -531,7 +534,7 @@ int main( )
         {
             moveFire();
         }
-        if(gameTimer % 5000000 == 0)
+        if(gameTimer % speed == 0)
         {
             moveSnake();
             CounterScore();
@@ -543,17 +546,40 @@ int main( )
     closegraph();
 }
 
-
-
 void play_again()
 {
     counterscore = 0;
+    speed = 5000000;
     while(!snakeBody.empty())
     {
         snakeBody.pop();
     }
-    /*----------MAIN------------*/
-    main();
+    initwindow(35 * CELL_SIZE, 38 * CELL_SIZE);
+    GameOver = false;
+    initSnake();
+    drawBoard();
+    int gameTimer = 0;
+    while(! GameOver )
+    {
+        if(gameTimer == INT_MAX)
+        {
+            gameTimer = 0;
+        }
+        if(gameTimer % 2000000 == 0)
+        {
+            moveFire();
+        }
+        if(gameTimer % speed == 0)
+        {
+            moveSnake();
+            CounterScore();
+        }
+        gameTimer++;
+        checkkeyInput();
+    }
+    while(! kbhit());
+    closegraph();
+
 }
 
 void gameover()
