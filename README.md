@@ -1,6 +1,6 @@
 # Snake Game
 #### A game with C++ graphics.h library
-##### New features were added
+* New features were added
 
 ## Developers :
 * [Ali Elshorpagi](https://github.com/Ali-Elshorpagi)
