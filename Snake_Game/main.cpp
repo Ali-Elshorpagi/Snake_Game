@@ -4,6 +4,7 @@
 #include <stdio.h>    /// To Use sprintf Func To Show Score
 #include <climits>
 #include <queue>
+#include <fstream>
 
 using namespace std;
 
@@ -14,8 +15,10 @@ const int BODY = 1;
 const int APPLE = 2;
 const int WALL = 3;
 
-int counterscore = 0; /// Score Counter
-char arr[100000];     /// To sprintf
+int counterscore = 0;
+int displaycounter = 0;
+char arr[100000];
+char arrsc[100000];
 long long speed = 5000000;
 
 bool GameOver = false;
@@ -473,9 +476,11 @@ void end()   /// We make this func To Show The End
     setcolor(RGB(255,217,0));
     setfillstyle(SOLID_FILL,RGB(255,217,0));
     settextstyle(GOTHIC_FONT,HORIZ_DIR,2);
-    outtextxy(150, 450, "Press \"ESC\" TO Close");
+    outtextxy(160, 450, "Press \"ESC\" To Close");
     settextstyle(GOTHIC_FONT,HORIZ_DIR,1);
-    outtextxy(95, 490, "Press \"SPACE\" TO Play Again..:)");
+    outtextxy(110, 490, "Press \"SPACE\" To Play Again");
+    settextstyle(GOTHIC_FONT,HORIZ_DIR,1);
+    outtextxy(130, 530, "Press \"H\" To Display Scores");
 
     /*----------------------------------------*/
 
@@ -505,10 +510,100 @@ void CounterScore()   /// We make this func To Show score and who made the game 
 
 void score()   /// We make this func to show the Score in game over screan
 {
+    ofstream out;
+    out.open("bin/Debug/package/Scores.txt",ios::app|ios::out);
     setcolor(WHITE);
     settextstyle(BOLD_FONT,HORIZ_DIR,3);
     sprintf(arr,"Score : %d",counterscore);
     outtextxy(245,400,arr);
+    out<<counterscore<<endl;
+    out.close();
+}
+
+void ScoreDisplay()
+{
+    setcolor(RGB(8,23,42));
+    setfillstyle(SOLID_FILL,RGB(8,23,42));
+    bar(18,18,613,666);
+
+    /*----------------------------------------*/
+
+    setcolor(RGB(230,230,230));
+    setfillstyle(SOLID_FILL,RGB(230,230,230));
+    bar(33,33,598,651);
+
+    /*----------------------------------------*/
+
+    setcolor(RGB(8,23,42));
+    setfillstyle(SOLID_FILL,RGB(8,23,42));
+    bar(48,48,583,636);
+
+    /*----------------------------------------*/
+
+    setbkcolor(RGB(8,23,42));
+    setcolor(RGB(239,37,97));
+    setfillstyle(SOLID_FILL,RGB(239,37,97));
+    settextstyle(GOTHIC_FONT,HORIZ_DIR,2);
+    outtextxy(60,60,"Scores :");
+
+
+    /*----------------------------------------*/
+
+    setcolor(RGB(69,217,253));
+    setfillstyle(SOLID_FILL,RGB(69,217,253));
+    settextstyle(GOTHIC_FONT,HORIZ_DIR,2);
+    outtextxy(320,65,"High Score : ");
+
+    /*----------------------------------------*/
+
+    setcolor(RGB(255,217,0));
+    setfillstyle(SOLID_FILL,RGB(255,217,0));
+    settextstyle(GOTHIC_FONT,HORIZ_DIR,2);
+    outtextxy(160, 500, "Press \"ESC\" To Close");
+    settextstyle(GOTHIC_FONT,HORIZ_DIR,1);
+    outtextxy(110, 540, "Press \"SPACE\" To Play Again");
+
+    /*----------------------------------------*/
+
+    setcolor(RGB(69,217,253));
+    setfillstyle(SOLID_FILL,RGB(69,217,253));
+    settextstyle(3,HORIZ_DIR,1);
+    outtextxy(280,570,"Powered by");
+    settextstyle(GOTHIC_FONT,HORIZ_DIR,5);
+    outtextxy(235,590,"CAST");
+
+}
+
+void DisplayScores()
+{
+    int scores,max=0;
+    ifstream in;
+    in.open("bin/Debug/package/Scores.txt");
+    int y=90;
+    while(in>>scores)
+    {
+        if(displaycounter == 19)
+        {
+            setcolor(WHITE);
+            settextstyle(BOLD_FONT,HORIZ_DIR,3);
+            sprintf(arrsc,"%d",max);
+            outtextxy(500,65,arrsc);
+            return;
+        }
+        else
+        {
+            setcolor(WHITE);
+            settextstyle(BOLD_FONT,HORIZ_DIR,3);
+            sprintf(arrsc,"  >> %d",scores);
+            outtextxy(80,y,arrsc);
+            y+=20;
+            if(max<scores)
+            {
+                max = scores;
+            }
+        }
+        displaycounter++;
+    }
 }
 
 int main( )
@@ -602,7 +697,11 @@ void gameover()
             else if(int(ch) == 32)  /// 32 To press a SPACE
             {
                 play_again();
-                //outtextxy(100, 530, "Wait Next Version, friend |^_^|");
+            }
+            else if(int(ch) == 72 || int(ch) == 104) /// 72 | 104 To Press H | h
+            {
+                ScoreDisplay();
+                DisplayScores();
             }
         }
     }
