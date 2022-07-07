@@ -510,13 +510,16 @@ void CounterScore()   /// We make this func To Show score and who made the game 
 
 void score()   /// We make this func to show the Score in game over screan
 {
-    ofstream out;
-    out.open("bin/Debug/package/Scores.txt",ios::app|ios::out);
+    ofstream out,ou;
+    out.open("package/Scores.txt",ios::app|ios::out);
+    ou.open("bin/Debug/package/Scores.txt",ios::app|ios::out);
     setcolor(WHITE);
     settextstyle(BOLD_FONT,HORIZ_DIR,3);
     sprintf(arr,"Score : %d",counterscore);
     outtextxy(245,400,arr);
     out<<counterscore<<endl;
+    ou<<counterscore<<endl;
+    ou.close();
     out.close();
 }
 
@@ -571,27 +574,28 @@ void ScoreDisplay()
     outtextxy(280,570,"Powered by");
     settextstyle(GOTHIC_FONT,HORIZ_DIR,5);
     outtextxy(235,590,"CAST");
+}
+
+void DeleteScores()
+{
 
 }
 
 void DisplayScores()
 {
     int scores,max=0;
-    ifstream in;
-    in.open("bin/Debug/package/Scores.txt");
+    ifstream in,n;
+    in.open("package/Scores.txt");
+    n.open("bin/Debug/package/Scores.txt");
     int y=90;
-    while(in>>scores)
+    if(in)
     {
-        if(displaycounter == 19)
+        while(in>>scores)
         {
             setcolor(WHITE);
             settextstyle(BOLD_FONT,HORIZ_DIR,3);
             sprintf(arrsc,"%d",max);
             outtextxy(500,65,arrsc);
-            return;
-        }
-        else
-        {
             setcolor(WHITE);
             settextstyle(BOLD_FONT,HORIZ_DIR,3);
             sprintf(arrsc,"  >> %d",scores);
@@ -602,7 +606,25 @@ void DisplayScores()
                 max = scores;
             }
         }
-        displaycounter++;
+    }
+    else if(n)
+    {
+        while(n>>scores)
+        {
+            setcolor(WHITE);
+            settextstyle(BOLD_FONT,HORIZ_DIR,3);
+            sprintf(arrsc,"%d",max);
+            outtextxy(500,65,arrsc);
+            setcolor(WHITE);
+            settextstyle(BOLD_FONT,HORIZ_DIR,3);
+            sprintf(arrsc,"  >> %d",scores);
+            outtextxy(80,y,arrsc);
+            y+=20;
+            if(max<scores)
+            {
+                max = scores;
+            }
+        }
     }
 }
 
