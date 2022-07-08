@@ -1,10 +1,10 @@
 #include <bits/stdc++.h>
 #include "graphics.h"
-#include <mmsystem.h>  /// To Make Us Use Sounds
-#include <stdio.h>    /// To Use sprintf Func To Show Score
+#include <mmsystem.h>
+#include <stdio.h>
 #include <climits>
 #include <queue>
-#include <fstream>
+#include <vector>
 
 using namespace std;
 
@@ -17,6 +17,8 @@ const int WALL = 3;
 
 int counterscore = 0;
 int displaycounter = 0;
+vector<int> Scores;
+
 char arr[100000];
 char arrsc[100000];
 long long speed = 5000000;
@@ -38,7 +40,7 @@ Directions fireDirection;
 
 queue <Location> snakeBody;
 
-int board[38][35] = /// We Increase The Array To Show The score Under The Game
+int board[38][35] =
 {
     {3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3},
     {3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3},
@@ -102,7 +104,7 @@ void drawApple(int row,int col)
     int left = col*CELL_SIZE;
     int top = row*CELL_SIZE;
 
-    readimagefile("package/apple.ico",left , top, left + 16, top + 16);  /// We Use an anthor icon That's more realistic
+    readimagefile("package/apple.ico",left , top, left + 16, top + 16);
 }
 
 void erasefire(int row,int col)
@@ -182,7 +184,7 @@ void initSnake()
     }
 }
 
-void drawbar(int x,int y,int x1,int y1)  /// We Make a func within name "drawbar" To Hide Game before star and after game over
+void drawbar(int x,int y,int x1,int y1)
 {
     setcolor(BLACK);
     setfillstyle(SOLID_FILL,BLACK);
@@ -268,7 +270,7 @@ void moveandgrowsanke(Location nextHead)
     board[nextHead.r][nextHead.c] = 1;
 }
 
-void gameover();  /// We Put the head of func "gameover" To allow us use the func that under it && Proto type
+void gameover();
 
 void moveSnake()
 {
@@ -362,7 +364,7 @@ void checkkeyInput()
                 startFire();
             }
         }
-        if(ch == 's' || ch == 'S')    /// Please Read the within name "README"
+        if(ch == 's' || ch == 'S')
         {
             sndPlaySound("package/snake_sound.wav",SND_ASYNC|SND_LOOP);
         }
@@ -381,7 +383,7 @@ void checkkeyInput()
     }
 }
 
-void start()   /// We make this func To Show The Start
+void start()
 {
     setcolor(RGB(8,23,42));
     setfillstyle(SOLID_FILL,RGB(8,23,42));
@@ -434,7 +436,7 @@ void start()   /// We make this func To Show The Start
     outtextxy(140,570,"Press any key to start");
 }
 
-void end()   /// We make this func To Show The End
+void end()
 {
     setcolor(RGB(8,23,42));
     setfillstyle(SOLID_FILL,RGB(8,23,42));
@@ -494,7 +496,7 @@ void end()   /// We make this func To Show The End
 
 
 
-void CounterScore()   /// We make this func To Show score and who made the game into the game
+void CounterScore()
 {
     drawbar(18,630,613,666);
     setbkcolor(BLACK);
@@ -508,7 +510,7 @@ void CounterScore()   /// We make this func To Show score and who made the game 
     outtextxy(50,637,arr);
 }
 
-void score()   /// We make this func to show the Score in game over screan
+void score()
 {
     ofstream out,ou;
     out.open("package/Scores.txt",ios::app|ios::out);
@@ -519,6 +521,7 @@ void score()   /// We make this func to show the Score in game over screan
     outtextxy(245,400,arr);
     out<<counterscore<<endl;
     ou<<counterscore<<endl;
+    displaycounter++;
     ou.close();
     out.close();
 }
@@ -546,8 +549,17 @@ void ScoreDisplay()
     setbkcolor(RGB(8,23,42));
     setcolor(RGB(239,37,97));
     setfillstyle(SOLID_FILL,RGB(239,37,97));
+    settextstyle(SANS_SERIF_FONT,HORIZ_DIR,3);
+    outtextxy(60,60,"Note : If the total number Scores greater than 17,");
+    outtextxy(130,90,"the all Scores will be Cleared |^_^|");
+
+    /*----------------------------------------*/
+
+    setbkcolor(RGB(8,23,42));
+    setcolor(RGB(239,37,97));
+    setfillstyle(SOLID_FILL,RGB(239,37,97));
     settextstyle(GOTHIC_FONT,HORIZ_DIR,2);
-    outtextxy(60,60,"Scores :");
+    outtextxy(60,130,"Scores :");
 
 
     /*----------------------------------------*/
@@ -555,7 +567,7 @@ void ScoreDisplay()
     setcolor(RGB(69,217,253));
     setfillstyle(SOLID_FILL,RGB(69,217,253));
     settextstyle(GOTHIC_FONT,HORIZ_DIR,2);
-    outtextxy(320,65,"High Score : ");
+    outtextxy(320,135,"High Score : ");
 
     /*----------------------------------------*/
 
@@ -576,9 +588,47 @@ void ScoreDisplay()
     outtextxy(235,590,"CAST");
 }
 
-void DeleteScores()
+bool DeleteScores()
 {
+    int scor;
+    Scores.clear();
+    ifstream in,n;
+    in.open("package/Scores.txt");
+    n.open("bin/Debug/package/Scores.txt");
+    if(in)
+    {
+        while(!in.eof())
+        {
+            in>>scor;
+            Scores.push_back(scor);
+        }
+        in.close();
+    }
+    else if(n)
+    {
+        while(!n.eof())
+        {
+            n>>scor;
+            Scores.push_back(scor);
+        }
+        n.close();
+    }
+    if(Scores.size() > 17)
+    {
+        /*int st1,st2;
 
+        st1 = remove("package/Scores.txt");
+        st2 = remove("bin/Debug/package/Scores.txt");
+
+        if(st1==0 && st2==0)
+            cout<<"\nFile Deleted Successfully!"<<endl;
+        else
+            cout<<"\nError Occurred!"<<endl;*/
+        in.open("package/Scores.txt", std::ofstream::out | std::ofstream::trunc);
+        n.open("bin/Debug/package/Scores.txt", std::ofstream::out | std::ofstream::trunc);
+        return false;
+    }
+    return true;
 }
 
 void DisplayScores()
@@ -587,51 +637,60 @@ void DisplayScores()
     ifstream in,n;
     in.open("package/Scores.txt");
     n.open("bin/Debug/package/Scores.txt");
-    int y=90;
+    int y=150;
     if(in)
     {
-        while(in>>scores)
+        if(DeleteScores())
         {
-            setcolor(WHITE);
-            settextstyle(BOLD_FONT,HORIZ_DIR,3);
-            sprintf(arrsc,"%d",max);
-            outtextxy(500,65,arrsc);
-            setcolor(WHITE);
-            settextstyle(BOLD_FONT,HORIZ_DIR,3);
-            sprintf(arrsc,"  >> %d",scores);
-            outtextxy(80,y,arrsc);
-            y+=20;
-            if(max<scores)
+            while(in>>scores)
             {
-                max = scores;
+                setcolor(WHITE);
+                settextstyle(BOLD_FONT,HORIZ_DIR,3);
+                sprintf(arrsc,"  >> %d",scores);
+                outtextxy(80,y,arrsc);
+                y+=20;
+                if(max<scores)
+                {
+                    max = scores;
+                }
+                setcolor(WHITE);
+                settextstyle(BOLD_FONT,HORIZ_DIR,3);
+                sprintf(arrsc,"%d",max);
+                outtextxy(500,135,arrsc);
+
             }
         }
+        in.close();
     }
     else if(n)
     {
-        while(n>>scores)
+        if(DeleteScores())
         {
-            setcolor(WHITE);
-            settextstyle(BOLD_FONT,HORIZ_DIR,3);
-            sprintf(arrsc,"%d",max);
-            outtextxy(500,65,arrsc);
-            setcolor(WHITE);
-            settextstyle(BOLD_FONT,HORIZ_DIR,3);
-            sprintf(arrsc,"  >> %d",scores);
-            outtextxy(80,y,arrsc);
-            y+=20;
-            if(max<scores)
+            while(n>>scores)
             {
-                max = scores;
+                setcolor(WHITE);
+                settextstyle(BOLD_FONT,HORIZ_DIR,3);
+                sprintf(arrsc,"  >> %d",scores);
+                outtextxy(80,y,arrsc);
+                y+=20;
+                if(max<scores)
+                {
+                    max = scores;
+                }
+                setcolor(WHITE);
+                settextstyle(BOLD_FONT,HORIZ_DIR,3);
+                sprintf(arrsc,"%d",max);
+                outtextxy(500,135,arrsc);
             }
         }
+        n.close();
     }
 }
 
 int main( )
 {
     initwindow(35 * CELL_SIZE, 38 * CELL_SIZE);
-    /// sndPlaySound("package/Snake Music.wav",SND_ASYNC|SND_LOOP);    /// WE add this line to play  a music during game
+    /// sndPlaySound("package/Snake Music.wav",SND_ASYNC|SND_LOOP);
     GameOver = false;
     drawBoard();
     start();
@@ -702,9 +761,9 @@ void play_again()
 void gameover()
 {
     GameOver = true;
-    PlaySound("package/game_over_sound.wav",NULL,SND_ASYNC);  /// we add this sound of game over
-    drawbar(18,18,613,613);   /// this function of drawbar that we explain above
-    end(); /// this function of end that we explain above
+    PlaySound("package/game_over_sound.wav",NULL,SND_ASYNC);
+    drawbar(18,18,613,613);
+    end();
     score();
     char ch;
     while(true)
