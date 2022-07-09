@@ -680,7 +680,7 @@ void DisplayScores()
 int main( )
 {
     initwindow(35 * CELL_SIZE, 38 * CELL_SIZE);
-    /// sndPlaySound("package/Snake Music.wav",SND_ASYNC|SND_LOOP);
+    //sndPlaySound("package/Snake Music.wav",SND_ASYNC|SND_LOOP);
     GameOver = false;
     drawBoard();
     start();
