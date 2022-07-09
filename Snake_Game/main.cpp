@@ -16,7 +16,7 @@ const int APPLE = 2;
 const int WALL = 3;
 
 int counterscore = 0;
-int displaycounter = 0;
+
 vector<int> Scores;
 
 char arr[100000];
@@ -521,7 +521,6 @@ void score()
     outtextxy(245,400,arr);
     out<<counterscore<<endl;
     ou<<counterscore<<endl;
-    displaycounter++;
     ou.close();
     out.close();
 }
@@ -615,15 +614,6 @@ bool DeleteScores()
     }
     if(Scores.size() > 17)
     {
-        /*int st1,st2;
-
-        st1 = remove("package/Scores.txt");
-        st2 = remove("bin/Debug/package/Scores.txt");
-
-        if(st1==0 && st2==0)
-            cout<<"\nFile Deleted Successfully!"<<endl;
-        else
-            cout<<"\nError Occurred!"<<endl;*/
         in.open("package/Scores.txt", std::ofstream::out | std::ofstream::trunc);
         n.open("bin/Debug/package/Scores.txt", std::ofstream::out | std::ofstream::trunc);
         return false;
@@ -660,7 +650,6 @@ void DisplayScores()
 
             }
         }
-        in.close();
     }
     else if(n)
     {
@@ -683,8 +672,9 @@ void DisplayScores()
                 outtextxy(500,135,arrsc);
             }
         }
-        n.close();
     }
+    in.close();
+    n.close();
 }
 
 int main( )
