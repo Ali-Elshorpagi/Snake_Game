@@ -1,5 +1,5 @@
 # Snake Game
-#### A game with C++ graphics.h library
+#### A Snake Game using the C++ graphics.h library
 * New features were added
 
 ## Developers :
