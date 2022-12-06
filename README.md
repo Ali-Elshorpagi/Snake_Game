@@ -9,6 +9,9 @@
 ## How to run the game immediately ?
 #### Go to the [Debug Folder](https://github.com/Ali-Elshorpagi/Snake_Game/tree/main/Snake_Game/bin) and download it and run the Sanke_Game.exe file inside it.
 
+## [Video of Gameplay ](https://www.youtube.com/watch?v=dQCAPSQ1mz0)
+
+
 ## Start Game
 ![Start Game](./img/Start.png)
 
