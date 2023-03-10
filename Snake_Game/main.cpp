@@ -514,15 +514,6 @@ void ScoreDisplay()
 
     /*----------------------------------------*/
 
-    /* setbkcolor(RGB(8, 23, 42));
-     setcolor(RGB(239, 37, 97));
-     setfillstyle(SOLID_FILL, RGB(239, 37, 97));
-     settextstyle(SANS_SERIF_FONT, HORIZ_DIR, 3);
-     outtextxy(60, 60, "Note : If the total number Scores greater than 17,");
-     outtextxy(130, 90, "the all Scores will be Cleared |^_^|");
-    */
-    /*----------------------------------------*/
-
     setbkcolor(RGB(8, 23, 42));
     setcolor(RGB(239, 37, 97));
     setfillstyle(SOLID_FILL, RGB(239, 37, 97));
