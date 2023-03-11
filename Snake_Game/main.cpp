@@ -33,6 +33,7 @@ enum Directions
     LEFT,
     RIGHT
 };
+
 Directions SnakeDirection = DOWN;
 
 struct Location
@@ -595,8 +596,8 @@ void DisplayScores()
             {
                 setcolor(WHITE);
                 settextstyle(BOLD_FONT, HORIZ_DIR, 3);
-                sprintf(arrsc, "  >> %d", scores);
-                outtextxy(110, y, arrsc);
+                sprintf(arrsc, "  > %d", scores);
+                outtextxy(120, y, arrsc);
                 y += 20;
                 if (mx < scores)
                     mx = scores;
@@ -615,8 +616,8 @@ void DisplayScores()
             {
                 setcolor(WHITE);
                 settextstyle(BOLD_FONT, HORIZ_DIR, 3);
-                sprintf(arrsc, "  >> %d", scores);
-                outtextxy(110, y, arrsc);
+                sprintf(arrsc, "  > %d", scores);
+                outtextxy(120, y, arrsc);
                 y += 20;
                 if (mx < scores)
                     mx = scores;
@@ -634,7 +635,7 @@ void DisplayScores()
 int main()
 {
     initwindow(35 * CELL_SIZE, 38 * CELL_SIZE,"Snake Game");
-    // sndPlaySound("package/Snake Music.wav",SND_ASYNC|SND_LOOP);
+    /// sndPlaySound("package/Snake Music.wav",SND_ASYNC|SND_LOOP);
     GameOver = false;
     drawBoard(), start(), setcolor(WHITE);
     getch();
