@@ -173,7 +173,7 @@ void initSnake()
     {
         snakeBody.push(loc);
         board[loc.r][loc.c] = 1;
-        loc.r += 1;
+        ++loc.r;
     }
 }
 
@@ -642,9 +642,9 @@ int main()
     {
         if (gameTimer == INT_MAX)
             gameTimer = 0;
-        if (gameTimer % 2000000 == 0)
+        if (!(gameTimer % 2000000))
             moveFire();
-        if (gameTimer % speed == 0)
+        if (!(gameTimer % speed))
             moveSnake(), CounterScore();
         ++gameTimer;
         checkkeyInput();
