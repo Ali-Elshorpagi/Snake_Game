@@ -24,7 +24,8 @@ char arr[100000];
 char arrsc[100000];
 long long speed(5000000);
 
-bool GameOver(false);
+bool GameOver(true);
+bool flag(true);
 
 enum Directions
 {
@@ -630,7 +631,8 @@ void DisplayScores()
 
 int main()
 {
-    initwindow(35 * CELL_SIZE, 38 * CELL_SIZE,"Snake Game");
+    if(flag)
+        initwindow(35 * CELL_SIZE, 38 * CELL_SIZE,"Snake Game"),flag=false;
     /// sndPlaySound("package/Snake Music.wav",SND_ASYNC|SND_LOOP);
     GameOver = false;
     drawBoard(), start(), setcolor(WHITE);
