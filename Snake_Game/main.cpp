@@ -17,15 +17,14 @@ const int APPLE(2);
 const int WALL(3);
 
 int counterscore(0);
+long long speed(5000000);
 
-vector<int> Scores;
+bool isFireStarted;
+bool GameOver(true);
+bool flag(true);
 
 char arr[100000];
 char arrsc[100000];
-long long speed(5000000);
-
-bool GameOver(true);
-bool flag(true);
 
 enum Directions
 {
@@ -36,6 +35,7 @@ enum Directions
 };
 
 Directions SnakeDirection = DOWN;
+Directions fireDirection;
 
 struct Location
 {
@@ -43,12 +43,11 @@ struct Location
     int c;
 };
 
-bool isFireStarted;
 Location fireLocation;
-Directions fireDirection;
 
 queue<Location> snakeBody;
 
+vector<int> Scores;
 vector<vector<int> > board(38,vector<int>(35));
 
 void drawWall(int row, int col)
@@ -155,7 +154,7 @@ void drawbar(int x, int y, int x1, int y1)
 
 Location getNextfire()
 {
-    Location nextFireLoc = fireLocation;
+    Location nextFireLoc(fireLocation);
     switch (fireDirection)
     {
     case UP:
@@ -599,7 +598,7 @@ void DisplayScores()
 int main()
 {
     if(flag)
-        initwindow(35 * CELL_SIZE, 38 * CELL_SIZE,"Snake Game"),flag=false;
+        initwindow(35 * CELL_SIZE, 38 * CELL_SIZE,"Snake Game"), flag = false;
     /// sndPlaySound("package/Snake Music.wav",SND_ASYNC|SND_LOOP);
     GameOver = false;
     drawBoard(), start(), setcolor(WHITE);
@@ -638,10 +637,9 @@ void gameover()
     PlaySound("package/game_over_sound.wav", NULL, SND_ASYNC);
     drawbar(18, 18, 613, 613);
     end(), score();
-    char ch;
     while (true)
     {
-        ch = getch();
+        char ch(getch());
         if (kbhit)
         {
             if (int(ch) == 27) /// 27 to press a ESC
