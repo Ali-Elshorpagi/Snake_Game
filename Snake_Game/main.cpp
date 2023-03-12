@@ -140,14 +140,10 @@ void drawSnakeBody(int row, int col)
 void drawBoard()
 {
     for (int i(1); i < 34; ++i)
-    {
         for (int j(1); j < 34; ++j)
-        {
-            if (board[4][25] || !board[4][25])
-                board[4][25] = 2;
             board[i][j] = 0;
-        }
-    }
+
+    board[4][25] = 2;
     for (int row(0); row < 38; ++row)
     {
         for (int col(0); col < 35; ++col)
